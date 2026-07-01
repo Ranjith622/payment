@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+</head>
+<body>
+
+<h2>Pay ₹500</h2>
+
+<button id="rzp-button1">
+    Pay Now
+</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+var options = {
+    "key": "{{ key }}",
+    "amount": "{{ amount }}",
+    "currency": "INR",
+    "name": "My Django App",
+    "description": "Test Payment",
+    "order_id": "{{ payment.id }}",
+
+    "handler": function(response){
+
+        alert("Payment Successful");
+
+        window.location.href="/success/";
+    }
+};
+
+var rzp1 = new Razorpay(options);
+
+document.getElementById('rzp-button1').onclick = function(e){
+
+    rzp1.open();
+
+    e.preventDefault();
+}
+
+</script>
+
+</body>
+</html>
